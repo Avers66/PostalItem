@@ -21,7 +21,7 @@ import java.time.ZonedDateTime;
 @Entity
 @Table(name = "postal_delivery")
 @AllArgsConstructor
-@NoArgsConstructor(access= AccessLevel.PROTECTED, force=true)
+@NoArgsConstructor(access= AccessLevel.PUBLIC, force=true)
 public class PostalDelivery {
 
     @Id
@@ -47,6 +47,8 @@ public class PostalDelivery {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private PostOffice postOffice;
     //private Long postId;
+
+
 
     public enum Type {
         LETTER, PACKAGE

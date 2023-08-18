@@ -22,7 +22,7 @@ import java.time.ZonedDateTime;
 @Entity
 @Table(name = "status_history")
 @AllArgsConstructor
-@NoArgsConstructor(access= AccessLevel.PROTECTED, force=true)
+@NoArgsConstructor(access= AccessLevel.PUBLIC, force=true)
 public class StatusHistory {
 
     @Id

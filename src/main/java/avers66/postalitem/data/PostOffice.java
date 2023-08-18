@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "post_office")
 @AllArgsConstructor
-@NoArgsConstructor(access= AccessLevel.PROTECTED, force=true)
+@NoArgsConstructor(access= AccessLevel.PUBLIC, force=true)
 public class PostOffice {
 
     @Id
