@@ -1,6 +1,6 @@
 # PostalItem
 
-Запуск Docker image: 'docker run -p8080:8080 avers66/postalitem:latest'
+Запуск Docker image: `docker run -p8080:8080 avers66/postalitem:latest`
 
 Документация OpenApi-UI http://localhost:8080/swagger-ui/index.html
 ![image](https://github.com/Avers66/PostalItem/assets/122222024/a4ea04c2-5977-42be-b561-bc7efbd8c67e)
