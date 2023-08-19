@@ -3,6 +3,7 @@ package avers66.postalitem.dto;
 import avers66.postalitem.data.PostOffice;
 import avers66.postalitem.data.PostalDelivery;
 import avers66.postalitem.data.Status;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -17,6 +18,7 @@ import java.time.ZonedDateTime;
  */
 
 @Data
+@Schema(description = "Dto для создания нового почтового отправления")
 public class PostalDeliveryDto {
 
     private PostalDelivery.Type type;
