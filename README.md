@@ -7,3 +7,4 @@
 Консоль управления БД http://localhost:8080/h2-console
 ![image](https://github.com/Avers66/PostalItem/assets/122222024/b6a2dd77-f489-4394-8e02-a66a6d477c6d)
 
+В корне проекта файл swagger.yaml с документацией. Его можно открыть в редакторе https://editor.swagger.io
