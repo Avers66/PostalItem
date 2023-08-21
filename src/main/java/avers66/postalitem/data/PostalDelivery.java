@@ -40,7 +40,7 @@ public class PostalDelivery {
 
     @Enumerated(EnumType.STRING)
     private Status currentStatus;
-    private ZonedDateTime dateTime;
+    public ZonedDateTime dateTime;
 
     @ManyToOne
     @JoinColumn(name = "postId")

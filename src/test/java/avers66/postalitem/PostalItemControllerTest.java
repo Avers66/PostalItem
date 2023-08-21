@@ -5,6 +5,7 @@ import avers66.postalitem.dto.PostOfficeDto;
 import avers66.postalitem.dto.PostalDeliveryDto;
 import avers66.postalitem.dto.StatusDto;
 import com.google.gson.Gson;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +17,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -57,8 +60,13 @@ public class PostalItemControllerTest {
     private Long postalId;
     private Long statusId;
 
+    //@BeforeEach
     @BeforeEach
     public void setup() {
+        postalRepo.deleteAll();
+        postRepo.deleteAll();
+        statusRepo.deleteAll();
+
         postOffice = new PostOffice(null, "Krasnodar", "350000", "Краснодар,ул Карасунская, дом 68");
         postRepo.save(postOffice);
         postId = postOffice.getId();
@@ -85,6 +93,8 @@ public class PostalItemControllerTest {
                 .andExpect(jsonPath("$.id").value(postalId))
                 .andExpect(jsonPath("$.postalCode").value("630000"));
     }
+
+
 
     @Test
     public void testPostPostOfficeCreate() throws Exception {
@@ -120,5 +130,18 @@ public class PostalItemControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.currentStatus").value("ARRIVAL"));
     }
+
+    @Test
+    public void testGetPostofficeAll() throws Exception {
+        Gson gson = new Gson();
+        String json = gson.toJson(Arrays.asList(postOffice));
+
+        mockMvc.perform(get("/postoffice/all"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(json));
+    }
+
+
+
 
 }

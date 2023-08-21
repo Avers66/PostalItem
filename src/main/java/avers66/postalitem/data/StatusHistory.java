@@ -36,7 +36,7 @@ public class StatusHistory {
 
     @Enumerated(EnumType.STRING)
     private Status status;
-    private ZonedDateTime date;
+    public ZonedDateTime date;
 
 
     @ManyToOne
