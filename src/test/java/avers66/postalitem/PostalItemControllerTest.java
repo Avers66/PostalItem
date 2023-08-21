@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -132,11 +133,12 @@ public class PostalItemControllerTest {
     }
 
     @Test
-    public void testGetPostofficeAll() throws Exception {
+    public void testGetPostOfficeAll() throws Exception {
         Gson gson = new Gson();
         String json = gson.toJson(Arrays.asList(postOffice));
 
         mockMvc.perform(get("/postoffice/all"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(json));
     }
