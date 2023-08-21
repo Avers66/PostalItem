@@ -14,7 +14,6 @@
 
 
 Скриншот тестирования. 
-![image](https://github.com/Avers66/PostalItem/assets/122222024/5c9a1a70-84f7-4687-80c9-38e28879b218)
-
+![image](https://github.com/Avers66/PostalItem/assets/122222024/cf095705-8838-45b8-93c8-b1a01fc25c40)
 
 
