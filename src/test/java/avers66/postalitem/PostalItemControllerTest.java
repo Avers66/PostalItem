@@ -1,6 +1,10 @@
 package avers66.postalitem;
 
 import avers66.postalitem.data.*;
+import avers66.postalitem.dto.PostOfficeDto;
+import avers66.postalitem.dto.PostalDeliveryDto;
+import avers66.postalitem.dto.StatusDto;
+import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import java.time.ZonedDateTime;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -66,9 +72,53 @@ public class PostalItemControllerTest {
 
     @Test
     public void testGetPostOfficeById() throws Exception {
-        mockMvc.perform(
-                        get("/postoffice/{id}", postId))
+        mockMvc.perform(get("/postoffice/{id}", postId))
                         .andExpect(status().isOk())
-                        .andExpect(jsonPath("$.id").value(postId));
+                        .andExpect(jsonPath("$.id").value(postId))
+                        .andExpect(jsonPath("$.name").value("Krasnodar"));
     }
+
+    @Test
+    public void testGetPostalDeliveryById() throws Exception {
+        mockMvc.perform(get("/postalitem/{id}", postalId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(postalId))
+                .andExpect(jsonPath("$.postalCode").value("630000"));
+    }
+
+    @Test
+    public void testPostPostOfficeCreate() throws Exception {
+        PostOfficeDto postOfficeDto = new PostOfficeDto("Novgorod", "173000", "Дворцовая ул, 2");
+        Gson gson = new Gson();
+        String json = gson.toJson(postOfficeDto);
+
+        mockMvc.perform(post("/postoffice/create").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.postalCode").value("173000"));
+    }
+
+    @Test
+    public void testPostPostalDeliveryCreate() throws Exception {
+        PostalDeliveryDto postalDeliveryDto= new PostalDeliveryDto(PostalDelivery.Type.LETTER,"630000", "address", "Alex", postOffice.getId());
+        Gson gson = new Gson();
+        String json = gson.toJson(postalDeliveryDto);
+
+        mockMvc.perform(post("/postalitem/create").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.postalCode").value("630000"));
+    }
+
+    @Test
+    public void testPutPostalDeliveryNewStatus() throws Exception {
+        StatusDto statusDto = new StatusDto(postalId, postId, Status.ARRIVAL);
+        Gson gson = new Gson();
+        String json = gson.toJson(statusDto);
+
+        mockMvc.perform(put("/postalitem/newstatus").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.currentStatus").value("ARRIVAL"));
+    }
+
 }

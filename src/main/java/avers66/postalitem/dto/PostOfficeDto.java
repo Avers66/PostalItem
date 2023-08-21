@@ -1,6 +1,7 @@
 package avers66.postalitem.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.Column;
  */
 
 @Data
+@AllArgsConstructor
 @Schema(description = "Dto для создания нового почтового отделения")
 public class PostOfficeDto {
 

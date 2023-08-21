@@ -60,14 +60,14 @@ public class PostalService {
         return postalDelivery;
     }
 
-    public void newStatus(StatusDto dto) {
+    public PostalDelivery newStatus(StatusDto dto) {
         Optional<PostalDelivery> postalDeliveryOpt = postalRepo.findById(dto.getPostalId());
-        if (postalDeliveryOpt.isEmpty()) return;
+        if (postalDeliveryOpt.isEmpty()) return null;
         PostalDelivery postalDelivery = postalDeliveryOpt.get();
         postalDelivery.setCurrentStatus(dto.getStatus());
         postalDelivery.setDateTime(ZonedDateTime.now());
         Optional<PostOffice> postOffice = postRepo.findById(dto.getPostId());
-        if (postOffice.isEmpty()) return ;
+        if (postOffice.isEmpty()) return null;
         postalDelivery.setPostOffice(postOffice.get());
         postalRepo.save(postalDelivery);
         StatusHistory statusHistory = new StatusHistory();
@@ -76,6 +76,7 @@ public class PostalService {
         statusHistory.setPostalDelivery(postalDelivery);
         statusHistory.setPostOffice(postOffice.get());
         statusRepo.save(statusHistory);
+        return postalDelivery;
     }
 
     public void deletePostalItemById(Long id) {

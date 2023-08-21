@@ -57,9 +57,9 @@ public class PostalController {
 
     @PutMapping("postalitem/newstatus")
     @Operation(description = "Изменение статуса почтового отправления")
-    public void postalItemChangeStatus(@RequestBody StatusDto dto) {
+    public ResponseEntity<PostalDelivery> postalItemChangeStatus(@RequestBody StatusDto dto) {
         log.info(dto.toString());
-        postalService.newStatus(dto);
+        return ResponseEntity.ok(postalService.newStatus(dto));
     }
 
     @DeleteMapping("postalitem/delete/{id}")
