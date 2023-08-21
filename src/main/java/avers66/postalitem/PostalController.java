@@ -50,7 +50,7 @@ public class PostalController {
 
     @PostMapping("postalitem/create")
     @Operation(description = "Создание и регистрация нового почтового отправления")
-    public ResponseEntity<Long> createPostalItem(@RequestBody PostalDeliveryDto dto){
+    public ResponseEntity<PostalDelivery> createPostalItem(@RequestBody PostalDeliveryDto dto){
         log.info(dto.toString());
         return ResponseEntity.ok(postalService.createPostalItem(dto));
     }
@@ -82,7 +82,7 @@ public class PostalController {
 
     @PostMapping("postoffice/create")
     @Operation(description = "Создание нового почтового отделения")
-    public ResponseEntity<Long> createPostOffice(@RequestBody PostOfficeDto dto) {
+    public ResponseEntity<PostOffice> createPostOffice(@RequestBody PostOfficeDto dto) {
         return ResponseEntity.ok(postalService.createPostOffice(dto));
     }
 

@@ -12,3 +12,6 @@
 
 В корне проекта файл swagger.yaml с документацией. Его можно открыть в редакторе https://editor.swagger.io
 
+
+Скриншот тестирования. Дополнительные тесты будут вскоре добавлены
+![image](https://github.com/Avers66/PostalItem/assets/122222024/7ed0fab9-4e6a-469f-8553-3ab83379a010)

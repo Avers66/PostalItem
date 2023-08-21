@@ -38,7 +38,7 @@ public class PostalService {
         return null;
     }
 
-    public Long createPostalItem(PostalDeliveryDto dto) {
+    public PostalDelivery createPostalItem(PostalDeliveryDto dto) {
 
         PostalDelivery postalDelivery = new PostalDelivery();
         postalDelivery.setType(dto.getType());
@@ -57,7 +57,7 @@ public class PostalService {
         statusHistory.setPostalDelivery(postalDelivery);
         statusHistory.setPostOffice(postOffice.get());
         statusRepo.save(statusHistory);
-        return postalDelivery.getId();
+        return postalDelivery;
     }
 
     public void newStatus(StatusDto dto) {
@@ -95,13 +95,12 @@ public class PostalService {
         return null;
     }
 
-    public Long createPostOffice(PostOfficeDto dto){
+    public PostOffice createPostOffice(PostOfficeDto dto){
         PostOffice postOffice = new PostOffice();
         postOffice.setAddress(dto.getAddress());
         postOffice.setPostalCode(dto.getPostalCode());
         postOffice.setName(dto.getName());
-        postRepo.save(postOffice);
-        return postOffice.getId();
+        return postRepo.save(postOffice);
     }
 
     public void deletePostOfficeById(Long id) {
