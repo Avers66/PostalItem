@@ -14,6 +14,7 @@
 
 
 Скриншот интеграционного тестирования.
-![image](https://github.com/Avers66/PostalItem/assets/122222024/cf095705-8838-45b8-93c8-b1a01fc25c40)
+![image](https://github.com/Avers66/PostalItem/assets/122222024/b898d1a9-ebba-4d86-b1f7-239bb214a051)
+
 
 
